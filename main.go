@@ -12,7 +12,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-var (
+const (
 	TRANS = "http://localhost:9091/transmission/rpc"
 )
 
