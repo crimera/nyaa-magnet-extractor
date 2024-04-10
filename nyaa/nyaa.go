@@ -1,4 +1,4 @@
-package main
+package nyaa
 
 import (
 	"bytes"
@@ -48,6 +48,7 @@ func AddTorrent(path string, magnet string) {
 
 	req, e := http.NewRequest("POST", TRANS, bytes.NewBuffer([]byte(data)))
 	Err(e)
+
 	req.Header = t
 	_, er := client.Do(req)
 	Err(er)
@@ -95,7 +96,7 @@ func GetMagnets(url string) (magnets []string) {
 	return magnets
 }
 
-func Query(q string, sort string, order string) (items []item) {
+func Query(q string, sort string, order string) (items []Item) {
 	url, _ := url.Parse(BASE_URL)
 	query := url.Query()
 	query.Set("q", q)
@@ -112,6 +113,8 @@ func Query(q string, sort string, order string) (items []item) {
 	doc.Find("tbody").First().Find("tr").Each(func(i int, s *goquery.Selection) {
 		title := ""
 		category := ""
+		magnet := ""
+		size := ""
 
 		s.Find("td").Each(func(i int, s *goquery.Selection) {
 			switch i {
@@ -119,10 +122,14 @@ func Query(q string, sort string, order string) (items []item) {
 				category, _ = s.Find("a[href][title]").Last().Attr("title")
 			case 1:
 				title, _ = s.Find("a[href][title]").Last().Attr("title")
+			case 2:
+				magnet, _ = s.Find("a[href]").Last().Attr("href")
+			case 3:
+				size = s.Text()
 			}
 		})
 
-		items = append(items, item{category, title, ""})
+		items = append(items, Item{category, title, size, magnet})
 	})
 
 	return items
@@ -147,8 +154,9 @@ func AddToClient() {
 	wg.Wait()
 }
 
-type item struct {
-	category string
-	name     string
-	magnet   string
+type Item struct {
+	Category string
+	Name     string
+	Size     string
+	Magnet   string
 }
