@@ -25,7 +25,7 @@
           "types": [
             { type: "fix", section: "Bug Fixes", hidden: false },
             { type: "feat", section: "Features", hidden: false },
-            { type: "update", section: "Refactor", hidden: false },
+            { type: "update", section: "Update", hidden: false },
             { type: "refactor", section: "Refactor", hidden: false },
           ]
         }
