@@ -81,7 +81,7 @@ func AddTorents(m list.Model) {
 	}
 
 	for _, magnet := range magnets {
-		nyaa.AddTorrent("/home/Videos/Anime", magnet)
+		nyaa.AddTorrent("/home/dingle/Videos/Anime", magnet)
 	}
 }
 
