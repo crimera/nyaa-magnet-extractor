@@ -28,5 +28,16 @@ jobs:
     - name: Build
       run: go build -v ./...
 
-    - name: Test
-      run: go test -v ./...
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "lts/*"
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.REPOSITORY_PUSH_ACCESS }}
+        run: npm exec semantic-release
