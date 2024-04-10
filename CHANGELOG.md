@@ -1,3 +1,10 @@
+## [1.0.1-dev.2](https://github.com/crimera/nyaa-magnet-extractor/compare/v1.0.1-dev.1...v1.0.1-dev.2) (2024-04-10)
+
+
+### Bug Fixes
+
+* Change build command ([b9ad6cd](https://github.com/crimera/nyaa-magnet-extractor/commit/b9ad6cdeaa758baf4223bac4e5cc5626f13b48aa))
+
 ## [1.0.1-dev.1](https://github.com/crimera/nyaa-magnet-extractor/compare/v1.0.0...v1.0.1-dev.1) (2024-04-10)
 
 
