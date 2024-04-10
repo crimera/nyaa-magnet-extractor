@@ -1,0 +1,62 @@
+{
+  "branches": [
+    "main",
+    {
+      "name": "dev",
+      "prerelease": true
+    }
+  ],
+  "plugins": [
+    ["@semantic-release/commit-analyzer", {
+        "releaseRules": [
+          { "type": "feat", "release": "minor" },
+          { "type": "update", "release": "patch" },
+          { "type": "refactor", "release": "patch" },
+          { "type": "fix", "release": "patch" },
+          { "type": "build", "scope": "Needs bump", "release": "patch" }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            { type: "fix", section: "Bug Fixes", hidden: false },
+            { type: "feat", section: "Features", hidden: false },
+            { type: "update", section: "Refactor", hidden: false },
+            { type: "refactor", section: "Refactor", hidden: false },
+          ]
+        }
+      }
+    ],
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "CHANGELOG.md",
+        ]
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "main"
+          }
+        ],
+        successComment: false
+      }
+    ],
+    [
+      "@saithodev/semantic-release-backmerge",
+      {
+        backmergeBranches: [{"from": "main", "to": "dev"}],
+        clearWorkspace: true
+      }
+    ]
+  ]
+}
